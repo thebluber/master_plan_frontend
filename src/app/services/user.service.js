@@ -2,18 +2,18 @@
 
 angular.module('MasterPlan')
   .service('User', function User ($state, Restangular, $q) {
-    this.currentUser = undefined;
+    this.sessionData = undefined;
     var that = this;
 
     this.authenticate = function() {
       var deferred = $q.defer();
       Restangular.one('session').get().then(
-          function(user) {
-            that.currentUser = user;
+          function(data) {
+            that.sessionData = data;
             deferred.resolve();
           },
           function(error) {
-            that.currentUser = undefined;
+            that.sessionData = undefined;
             $state.go('signin');
           });
       return deferred.promise;

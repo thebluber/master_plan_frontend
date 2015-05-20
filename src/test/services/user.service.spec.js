@@ -16,11 +16,12 @@ describe('user.service', function(){
     state = $injector.get('$state');
   }));
 
+  //test authenticate
   it('should get current session', function() {
     httpBackend.expect('GET', '/api/v1/session').respond({ email: 'user@example.com' });
     userService.authenticate();
     httpBackend.flush();
-    expect(userService.currentUser.email).toEqual('user@example.com');
+    expect(userService.sessionData.email).toEqual('user@example.com');
   });
 
   it('should go to signin state if get session fails', function() {
@@ -29,4 +30,5 @@ describe('user.service', function(){
     userService.authenticate();
     httpBackend.flush();
   });
+
 });
