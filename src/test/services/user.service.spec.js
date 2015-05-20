@@ -21,7 +21,7 @@ describe('user.service', function(){
     httpBackend.expect('GET', '/api/v1/session').respond({ email: 'user@example.com' });
     userService.authenticate();
     httpBackend.flush();
-    expect(userService.sessionData.email).toEqual('user@example.com');
+    expect(userService.currentUser.email).toEqual('user@example.com');
   });
 
   it('should go to signin state if get session fails', function() {
