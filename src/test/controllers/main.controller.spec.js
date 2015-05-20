@@ -1,22 +1,21 @@
 'use strict';
 
 describe('controllers', function(){
-  var scope;
+  var state;
 
   beforeEach(module('MasterPlan'));
+  beforeEach(module('stateMock'));
 
-  beforeEach(inject(function($rootScope) {
-    scope = $rootScope.$new();
+  beforeEach(inject(function($injector) {
+    state = $injector.get('$state');
   }));
 
-  it('should define more than 5 awesome things', inject(function($controller) {
-    expect(scope.awesomeThings).toBeUndefined();
-
+  it('should go to /dashboard if user is signed in', inject(function($controller) {
     $controller('MainCtrl', {
-      $scope: scope
+      User: { sessionData: '' },
+      $state: state
     });
+    state.expectTransitionTo('dashboard');
 
-    expect(angular.isArray(scope.awesomeThings)).toBeTruthy();
-    expect(scope.awesomeThings.length > 5).toBeTruthy();
   }));
 });

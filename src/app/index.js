@@ -13,12 +13,19 @@ angular.module('MasterPlan', [
     $urlRouterProvider.otherwise('/');
 
     $stateProvider
-      .state('dashboard', {
+      .state('home', {
         url: '/',
-        templateUrl: 'app/views/main.html',
-        controller: 'MainCtrl'
+        template: '',
+        controller: 'MainCtrl',
+        resolve: {
+          resolver: function(User) { return User.authenticate(); }
+        }
       }).state('signin', {
-        url: '/sign_in'
+        url: '/sign_in',
+        templateUrl: 'app/views/sign_in.html'
+      }).state('dashboard', {
+        url: '/dashboard',
+        templateUrl: 'app/views/dashboard.html'
       })
 
   })
