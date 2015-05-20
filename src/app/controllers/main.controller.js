@@ -2,7 +2,7 @@
 
 angular.module('MasterPlan')
   .controller('MainCtrl', function ($state, User) {
-    if(User.sessionData) {
+    if(User.currentUser) {
       $state.go('dashboard');
     }
   });

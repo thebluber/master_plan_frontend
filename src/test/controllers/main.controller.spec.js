@@ -1,6 +1,6 @@
 'use strict';
 
-describe('controllers', function(){
+describe('main.controller', function(){
   var state;
 
   beforeEach(module('MasterPlan'));
