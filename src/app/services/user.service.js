@@ -9,6 +9,14 @@ angular.module('MasterPlan')
       this.currentUser = user;
     };
 
+    this.gravatarHash = function() {
+      if(this.currentUser === undefined) {
+        return '';
+      } else {
+        return CryptoJS.MD5(this.currentUser.email.trim().toLowerCase()).toString();
+      }
+    };
+
     this.authenticate = function() {
       var deferred = $q.defer();
       Restangular.one('session').get().then(

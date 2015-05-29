@@ -32,7 +32,6 @@ module.exports = function(options) {
       return '!' + file;
     }));
 
-
     gulp.src(srcFiles)
       .pipe(concat(function(files) {
         callback(bowerDeps.js
@@ -44,9 +43,16 @@ module.exports = function(options) {
 
   function runTests (singleRun, done) {
     listFiles(function(files) {
+      var cryptoJSFiles = [
+        __dirname + '/../bower_components/crypto-js/index.js',
+        __dirname + '/../bower_components/crypto-js/core.js',
+        __dirname + '/../bower_components/crypto-js/md5.js',
+        __dirname + '/../bower_components/crypto-js/crypto-js.js'
+      ];
+
       karma.server.start({
         configFile: __dirname + '/../karma.conf.js',
-        files: files,
+        files: files.concat(cryptoJSFiles),
         singleRun: singleRun,
         autoWatch: !singleRun
       }, done);

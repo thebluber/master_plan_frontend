@@ -31,4 +31,11 @@ describe('user.service', function(){
     httpBackend.flush();
   });
 
+  //test gravatarhash
+  it('should generate gravatarHash from user email', function() {
+    expect(userService.gravatarHash()).toEqual('');
+    userService.currentUser = { email: 'User@example.com ' };
+    expect(userService.gravatarHash()).toEqual('b58996c504c5638798eb6b511e6f49af');
+  });
+
 });
