@@ -22,11 +22,13 @@ angular.module('MasterPlan', [
         }
       }).state('signin', {
         url: '/sign_in',
-        templateUrl: 'app/views/sign_in.html'
+        templateUrl: 'app/views/sign_in.html',
+        controller: 'UserCtrl'
       }).state('dashboard', {
         url: '/dashboard',
+        controller: 'DashboardCtrl',
         templateUrl: 'app/views/dashboard.html'
-      })
+      });
 
   })
 ;
