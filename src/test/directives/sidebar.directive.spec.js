@@ -23,7 +23,7 @@ describe('sidebar.directive', function(){
     scope.gravatarHash = "12345";
     var element = compile('<sidebar></sidebar>')(scope);
     scope.$digest();
-    expect(element.find('img').attr('src')).toEqual('http://www.gravatar.com/avatar/12345?d=retro');
+    expect(element.find('img').attr('src')).toMatch('http://www.gravatar.com/avatar/12345');
   });
 
 });
