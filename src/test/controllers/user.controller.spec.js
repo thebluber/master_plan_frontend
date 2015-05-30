@@ -16,9 +16,11 @@ describe('user.controller', function() {
     httpBackend = $injector.get('$httpBackend');
 
     user = {
-      setCurrentUser: function(data) {}
+      setCurrentUser: function(data) {},
+      removeCurrentUser: function() {}
     }
     spyOn(user, 'setCurrentUser');
+    spyOn(user, 'removeCurrentUser');
   }));
 
   it('should sign in user', inject(function($controller) {
@@ -54,5 +56,6 @@ describe('user.controller', function() {
 
     expect(scope.flash).toEqual({ error: '' });
     expect(scope.hasError).toBe(true);
+    expect(user.removeCurrentUser).toHaveBeenCalled();
   }));
 });

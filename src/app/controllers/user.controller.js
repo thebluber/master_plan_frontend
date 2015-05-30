@@ -9,10 +9,11 @@ angular.module('MasterPlan')
     $scope.signIn = function() {
       Restangular.all('users/sign_in').post({ user: $scope.user }).then(
         function(response) {
-          User.setCurrentUser(response.data);
+          User.setCurrentUser(response);
           $state.go('dashboard');
         },
         function(response) {
+          User.removeCurrentUser();
           $scope.flash = response.data;
           $scope.hasError = true;
         }
