@@ -1,20 +1,19 @@
 'use strict';
 
 angular.module('MasterPlan')
-  .service('User', function User ($state, Restangular, $q) {
-    this.currentUser = undefined;
+  .service('User', function User ($state, Restangular, $q, $cookieStore) {
     var that = this;
 
-    this.setCurrentUser = function(user) {
-      this.currentUser = user;
+    this.gravatarHash = function(email) {
+      return CryptoJS.MD5(email.trim().toLowerCase()).toString();
     };
 
-    this.gravatarHash = function() {
-      if(this.currentUser === undefined) {
-        return '';
-      } else {
-        return CryptoJS.MD5(this.currentUser.email.trim().toLowerCase()).toString();
-      }
+    this.setCurrentUser = function(user) {
+      $cookieStore.put('current_user', { email: user.email, gravatarHash: this.gravatarHash(user.email) });
+    };
+
+    this.removeCurrentUser = function() {
+      $cookieStore.remove('current_user');
     };
 
     this.authenticate = function() {
@@ -25,7 +24,7 @@ angular.module('MasterPlan')
             deferred.resolve();
           },
           function() {
-            that.setCurrentUser(undefined);
+            that.removeCurrentUser();
             $state.go('signin');
           });
       return deferred.promise;

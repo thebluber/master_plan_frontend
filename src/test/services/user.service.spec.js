@@ -8,34 +8,37 @@ describe('user.service', function(){
   //instantiate service
   var userService,
       state,
+      cookies,
       httpBackend;
 
   beforeEach(inject(function($injector) {
     userService = $injector.get('User');
     httpBackend = $injector.get('$httpBackend');
+    cookies = $injector.get('$cookieStore');
     state = $injector.get('$state');
   }));
 
   //test authenticate
-  it('should get current session', function() {
+  it('should store current user email and gravatarHash in cookies', function() {
     httpBackend.expect('GET', '/api/v1/session').respond({ email: 'user@example.com' });
     userService.authenticate();
     httpBackend.flush();
-    expect(userService.currentUser.email).toEqual('user@example.com');
+    expect(cookies.get('current_user').email).toEqual('user@example.com');
+    expect(cookies.get('current_user').gravatarHash).toEqual('b58996c504c5638798eb6b511e6f49af');
   });
 
-  it('should go to signin state if get session fails', function() {
+  it('should go to signin state if get session fails and remove current user from cookie', function() {
     httpBackend.expect('GET', '/api/v1/session').respond(401, '');
     state.expectTransitionTo('signin');
     userService.authenticate();
     httpBackend.flush();
+    expect(cookies.get('current_user')).toBeUndefined();
   });
 
   //test gravatarhash
   it('should generate gravatarHash from user email', function() {
-    expect(userService.gravatarHash()).toEqual('');
-    userService.currentUser = { email: 'User@example.com ' };
-    expect(userService.gravatarHash()).toEqual('b58996c504c5638798eb6b511e6f49af');
+    expect(userService.gravatarHash('User@example.com ')).toEqual('b58996c504c5638798eb6b511e6f49af');
+    expect(userService.gravatarHash('user@example.com')).toEqual('b58996c504c5638798eb6b511e6f49af');
   });
 
 });
