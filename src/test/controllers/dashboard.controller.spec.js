@@ -16,22 +16,24 @@ describe('dashboard.controller', function() {
 
   it('should have gravatarHash in scope if currentUser is set in cookie', inject(function($controller) {
     cookieStore.put('current_user', { gravatarHash: '12345' });
-
     $controller('DashboardCtrl', {
       $scope: scope,
       $cookieStore: cookieStore,
       User: userService
     });
+    scope.$digest();
     expect(scope.gravatarHash).toBeDefined();
     expect(scope.gravatarHash).toEqual('12345');
   }));
 
   it('should call authenticate if currentUser is not set in cookie', inject(function($controller) {
+    cookieStore.remove('current_user');
     $controller('DashboardCtrl', {
       $scope: scope,
       $cookieStore: cookieStore,
       User: userService
     });
+    scope.$digest();
     expect(userService.authenticate).toHaveBeenCalled();
   }));
 });

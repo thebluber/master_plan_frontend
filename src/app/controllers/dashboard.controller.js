@@ -2,9 +2,12 @@
 
 angular.module('MasterPlan')
   .controller('DashboardCtrl', function($scope, User, $cookieStore) {
-    if($cookieStore.get('current_user')) {
-      $scope.gravatarHash = $cookieStore.get('current_user').gravatarHash;
-    } else {
-      User.authenticate();
-    }
+    $scope.$watch(function() { return $cookieStore.get('current_user'); }, function(user) {
+      if(user) {
+        $scope.gravatarHash = $cookieStore.get('current_user').gravatarHash;
+      }else {
+        User.authenticate();
+      }
+
+    }, true);
   });
