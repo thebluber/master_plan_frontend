@@ -33,7 +33,7 @@ describe('user.controller', function() {
     expect(scope.user).toBeDefined();
     expect(scope.signIn).toBeDefined();
     httpBackend.expect('POST', '/api/v1/users/sign_in').respond({ email: 'user@test.de' });
-    state.expectTransitionTo('dashboard');
+    state.expectTransitionTo('home.dashboard');
 
     scope.signIn();
     httpBackend.flush();

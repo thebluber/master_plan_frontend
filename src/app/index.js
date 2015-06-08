@@ -15,19 +15,22 @@ angular.module('MasterPlan', [
     $stateProvider
       .state('home', {
         url: '/',
-        template: '',
-        controller: 'MainCtrl',
+        templateUrl: 'app/views/home.html',
+        controller: 'HomeCtrl',
         resolve: {
           resolver: function(User) { return User.authenticate(); }
         }
+      }).state('home.dashboard', {
+        url: 'dashboard',
+        controller: 'DashboardCtrl',
+        templateUrl: 'app/views/dashboard.html'
       }).state('signin', {
         url: '/sign_in',
         templateUrl: 'app/views/sign_in.html',
         controller: 'UserCtrl'
-      }).state('dashboard', {
-        url: '/dashboard',
-        controller: 'DashboardCtrl',
-        templateUrl: 'app/views/dashboard.html'
+      }).state('signout', {
+        url: '/sign_out',
+        controller: 'SignOutCtrl'
       });
 
   })

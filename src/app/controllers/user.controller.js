@@ -10,7 +10,7 @@ angular.module('MasterPlan')
       Restangular.all('users/sign_in').post({ user: $scope.user }).then(
         function(response) {
           User.setCurrentUser(response);
-          $state.go('dashboard');
+          $state.go('home.dashboard');
         },
         function(response) {
           User.removeCurrentUser();
@@ -19,7 +19,6 @@ angular.module('MasterPlan')
         }
       );
     };
-
 
   });
 
