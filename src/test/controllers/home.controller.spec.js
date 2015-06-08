@@ -1,6 +1,6 @@
 'use strict';
 
-describe('main.controller', function(){
+describe('home.controller', function(){
   var state;
 
   beforeEach(module('MasterPlan'));
@@ -11,11 +11,11 @@ describe('main.controller', function(){
   }));
 
   it('should go to /dashboard if user is signed in', inject(function($controller) {
-    $controller('MainCtrl', {
+    $controller('HomeCtrl', {
       User: { sessionData: '' },
       $state: state
     });
-    state.expectTransitionTo('dashboard');
+    state.expectTransitionTo('home.dashboard');
 
   }));
 });
