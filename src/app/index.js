@@ -16,10 +16,7 @@ angular.module('MasterPlan', [
       .state('home', {
         url: '/',
         templateUrl: 'app/views/home.html',
-        controller: 'HomeCtrl',
-        resolve: {
-          resolver: function(User) { return User.authenticate(); }
-        }
+        controller: 'HomeCtrl'
       }).state('home.dashboard', {
         url: 'dashboard',
         controller: 'DashboardCtrl',
