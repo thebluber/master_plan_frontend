@@ -31,11 +31,13 @@ describe('navbar.directive', function(){
     expect(userService.authenticate).toHaveBeenCalled();
   });
 
+  /*
   it('should have gravatar img', function() {
     cookieStore.put('current_user', { email: 'user@user.de', gravatarHash: '12345' });
     var element = compile('<navbar></navbar>')(scope);
     scope.$digest();
     expect(element.find('img').attr('src')).toMatch('http://www.gravatar.com/avatar/12345');
   });
+  */
 
 });
