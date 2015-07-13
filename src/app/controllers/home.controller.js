@@ -1,5 +1,6 @@
 'use strict';
 
 angular.module('MasterPlan')
-  .controller('HomeCtrl', function() {
+  .controller('HomeCtrl', function($state) {
+    $state.go('home.dashboard');
   });
