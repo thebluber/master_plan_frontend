@@ -15,6 +15,14 @@ angular.module('MasterPlan')
             console.log(error);
           });
         });
+
+        scope.toggleForDate = function(task){
+          Task.toggleForDate(task, scope.today).then(function(response) {
+            task.done = !task.done;
+          }, function(error) {
+            console.log(error);
+          });
+        }
       }
     };
   });
