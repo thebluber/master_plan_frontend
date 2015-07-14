@@ -1,0 +1,37 @@
+<div class="row" ng-show="dailyTasks.length > 0">
+  <h1>Tasks for {{dateString}}</h1>
+  <table class="tasks table table-hover table-responsive">
+    <thead>
+      <tr>
+        <td>Goal</td>
+        <td>Description</td>
+        <td>Category</td>
+        <td>Flag</td>
+        <td>Deadline</td>
+        <td></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="task in dailyTasks">
+        <td ng-show="task.goal" tooltip-trigger="mouseenter" tooltip="{{task.goal.title}}" tooltip-append-to-body="true" tooltip-placement="bottom">
+          <i class="fa fa-link"></i>
+        </td>
+        <td ng-hide="task.goal"></td>
+        <td>{{task.description}}</td>
+        <td><i class="fa fa-briefcase"></i> {{task.category.name}}</td>
+        <td><i class="fa fa-flag"></i> {{task.type}}</td>
+        <td ng-show="task.deadline"><i class="fa fa-clock-o"></i> {{task.deadline}}</td>
+        <td ng-hide="task.deadline"></td>
+        <td>
+          <i class="fa fa-check-square-o" ng-show="task.done"></i>
+          <i class="fa fa-square-o" ng-hide="task.done"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="row" ng-show="dailyTasks.length == 0">
+  <h1>No tasks defined yet!</h1>
+</div>
