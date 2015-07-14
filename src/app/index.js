@@ -21,6 +21,10 @@ angular.module('MasterPlan', [
         url: 'dashboard',
         controller: 'DashboardCtrl',
         templateUrl: 'app/views/dashboard.html'
+      }).state('home.tasks', {
+        url: 'tasks',
+        controller: 'TaskCtrl',
+        templateUrl: 'app/views/tasks.html'
       }).state('signin', {
         url: '/sign_in',
         templateUrl: 'app/views/sign_in.html',
