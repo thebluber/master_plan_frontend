@@ -9,7 +9,7 @@ angular.module('MasterPlan')
     };
 
     this.setCurrentUser = function(user) {
-      $cookieStore.put('current_user', { email: user.email, gravatarHash: this.gravatarHash(user.email) });
+      $cookieStore.put('current_user', { email: user.email, gravatarHash: this.gravatarHash(user.email), goals: user.goals, categories: user.categories });
     };
 
     this.removeCurrentUser = function() {
