@@ -23,8 +23,6 @@ describe('task.controller', function() {
     httpBackend.expect('GET', '/api/v1/tasks').respond([{ category: {id: 1, name: 'work'}, deadline: '2015-07-15' }]);
     httpBackend.flush();
     expect(scope.tasks).toBeDefined();
-    //task deadline should be converted to date object
-    expect(scope.tasks[0].deadline instanceof Date).toBe(true);
 
   }));
 

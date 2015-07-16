@@ -1,0 +1,83 @@
+<form>
+  <table class="task-form-table">
+    <thead>
+      <tr>
+        <td class="col-md-5">
+          <i class="fa fa-flag goal"></i>
+          <label>Description</label>
+        </td>
+        <td class="col-md-2"><label>Category</label></td>
+        <td class="col-md-2"><label>Type</label></td>
+        <td class="col-md-2"><label>Deadline</label></td>
+        <td class="col-md-1"></td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button class="btn btn-info" type="button">
+                <i class="fa fa-link" ng-hide="task.goal" tooltip-trigger="mouseenter" tooltip="Link to a goal" tooltip-append-to-body="true" tooltip-placement="bottom"></i>
+                <i class="fa fa-link" ng-show="task.goal" tooltip-trigger="mouseenter" tooltip="{{task.goal.title}}" tooltip-append-to-body="true" tooltip-placement="bottom"></i>
+              </button>
+            </span>
+            <input type="text" class="form-control" ng-model="task.description">
+          </div>
+        </td>
+
+        <td>
+          <div class="input-group">
+            <span class="input-group-btn">
+              <button class="btn btn-info" type="button">
+                <i class="fa fa-plus" tooltip-trigger="mouseenter" tooltip="Add a new category" tooltip-append-to-body="true" tooltip-placement="bottom"></i>
+              </button>
+            </span>
+            <select class="form-control" ng-model="category_id" ng-options="category.id as category.name for category in categories">
+            </select>
+          </div>
+        </td>
+
+        <td>
+          <select class="form-control" ng-model="task.type">
+            <option>daily</option>
+            <option>weekly</option>
+            <option>monthly</option>
+            <option>onetime</option>
+          </select>
+        </td>
+
+        <td>
+          <div class="input-group">
+            <input type="text" ng-model="task.deadline" class="form-control">
+            <span class="input-group-btn">
+              <button class="btn btn-info" type="button" ng-click="toggleDatepicker(task)">
+                <i class="fa fa-calendar"></i>
+              </button>
+              <button ng-show="pickedDate" class="btn btn-danger" type="button" ng-click="clearDatepicker()" tooltip-trigger="mouseenter" tooltip="Clear deadline" tooltip-append-to-body="true" tooltip-placement="bottom">
+                <i class="fa fa-close"></i>
+              </button>
+            </span>
+          </div>
+        </td>
+
+        <td>
+          <button type="submit" class="btn btn-default">Update</button>
+        </td>
+      </tr>
+
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          <div ng-show="datepickerOpen">
+            <datepicker ng-model="pickedDate" show-button-bar="true" min-date="today" show-weeks="true"></datepicker>
+          </div>
+        </td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</form>

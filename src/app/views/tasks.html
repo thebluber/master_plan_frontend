@@ -1,3 +1,23 @@
 <div class="container">
-  <h1>Tasks</h1>
+  <div class="row">
+    <h1>Tasks</h1>
+
+    <accordion>
+      <accordion-group ng-repeat="task in tasks">
+        <accordion-heading>
+          <i class="fa fa-flag" ng-show="task.goal"></i>
+          {{task.description}}
+          <div class="pull-right">
+            <span>Clone</span>
+            <span>Delete</span>
+          </div>
+        </accordion-heading>
+        
+        <task-form task="task" goals="user.goals" categories="user.categories"></task-form>
+
+      </accordion-group>
+    </accordion>
+
+
+  </div>
 </div>
